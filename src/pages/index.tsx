@@ -1,5 +1,8 @@
+import { format } from "path/posix";
 import { FormEvent, useState } from "react";
 import { SearchResults } from "../components/SearchResults";
+
+import styles from "../styles/Home.module.scss";
 
 export default function Home() {
   const [search, setSearch] = useState("");
@@ -19,19 +22,26 @@ export default function Home() {
   }
 
   return (
-    <div>
-      <h1>Search</h1>
+    <div className={styles.container}>
+      <div className={styles.formContainer}>
+        <h1 className={styles.title}>Search</h1>
 
-      <form onSubmit={handleSearch}>
-        <input
-          type="text"
-          value={search}
-          onChange={(e) => setSearch(e.target.value)}
-        />
-        <button type="submit">Buscar</button>
-      </form>
+        <form onSubmit={handleSearch} className={styles.form}>
+          <input
+            type="text"
+            value={search}
+            onChange={(e) => setSearch(e.target.value)}
+            className={styles.input}
+          />
+          <button type="submit" className={styles.button}>
+            Buscar
+          </button>
+        </form>
+      </div>
 
-      <SearchResults results={results} />
+      <div className={styles.results}>
+        <SearchResults results={results} />
+      </div>
     </div>
   );
 }
